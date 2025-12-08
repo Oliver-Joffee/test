@@ -1,0 +1,89 @@
+
+/*
+ * Irene Feng Nov 2022
+ * This is the class where we create the Quiz and run it. It has the main method.  
+ */
+import java.util.Scanner;
+
+public class Quiz {
+        static Scanner sc = new Scanner(System.in);
+
+        public static void main(String[] args) throws Exception {
+                // Create Categories
+                Category skyward = new Category("Skyward Sword",
+                                "The Legend of Zelda: Skyward Sword was released in 2011! You love linear stories with a clear start and end. You love having a clear goal, and probably hate the wild-era games. You love the game's cool motion control swordfighting, but you’ve probably hit your hand on the wall at least once from the janky motion controls. You REALLY, REALLY, REALLY care about the Zelda timeline.\n" + //
+                                                                                "");
+                Category breath = new Category("Breath of the Wild", "The Legend of Zelda: Breath of the Wild released in 2017! "
+                                + "You were probably introduced to Zelda recently, and think all Zelda games are like BotW. You probably hate Skyward Sword for its linear gameplay, and just want to do whatever you want with no clear goals. You are an outdoorsy kind of person, who loves to explore as much as you can. You don’t care about the Zelda timeline.\n" + //
+                                                                                "");
+                Category ocarina = new Category("Ocarina of Time",
+                                "The Legend of Zelda: Ocarina of Time was released in 1998! You love the classics, and think the “Zelda Formula” is a holy grail, and must be worshipped and followed at all costs. You think every Zelda game should have a musical instrument. Your favorite moment of Twilight Princess was probably talking to the Hero’s Shade and finding out it was the Link from OoT. You probably think Oot didn’t make the timeline confusing at all, but in the end, you don’t really care about the timeline.\n" + //
+                                                                                "");
+                Category wind = new Category("Wind Waker", "Ahoy matey! The Legend of Zelda: The Wind Waker was released in 2002! If given the choice, peace, You love the cartoony artstyle of this game to death, and probably hate Twilight Princess. The vast ocean calls to you, and you want more than anything to sail the seven seas. You enjoy taking a moment to breathe, and take in the wonder of the ocean. You don’t really care about the Zelda timeline.\n" + //
+                                                "");
+                // Create Questions
+                Question q1 = new Question("How would you like to travel?");
+                // Attach Answers to Questions
+                q1.possibleAnswers[0] = new Answer("By horse", ocarina);
+                q1.possibleAnswers[1] = new Answer("By plane",
+                                skyward);
+                q1.possibleAnswers[2] = new Answer("By walking", breath);
+                q1.possibleAnswers[3] = new Answer("By boat", wind);
+
+                Question q2 = new Question("What's your favorite hobby?");
+                q2.possibleAnswers[0] = new Answer("Playing an instrument", ocarina);
+                q2.possibleAnswers[1] = new Answer("Fencing", skyward);
+                q2.possibleAnswers[2] = new Answer("Hiking", breath);
+                q2.possibleAnswers[3] = new Answer("Sailing",
+                                wind);
+
+                // ... more questions here
+
+                Question q3 = new Question("What's your favorite movie?");
+                q3.possibleAnswers[0] = new Answer("Pirates of the Carribbean", wind);
+                q3.possibleAnswers[1] = new Answer("Lord of the Rings", breath);
+                q3.possibleAnswers[2] = new Answer("The Godfather", ocarina);
+                q3.possibleAnswers[3] = new Answer("Dune", skyward);
+
+                // For each question, ask, read input, store answer.
+                gameIntro();
+                Question[] qList = { q1, q2, q3 };
+                for (Question q : qList) {
+                        Category c = q.ask(sc);
+                        c.points++;
+                }
+                // Get most common category from the questions asked
+                // Return Category
+                Category[] cList = { skyward, breath, ocarina, wind };
+                // these need to be in the same order or the points will be incorrect!
+                int index = getMostPopularCatIndex(cList);
+                System.out.println("If you were a Zelda game, you would be " + cList[index].label + ". ");
+                System.out.println(cList[index].description);
+
+        }
+
+        public static void gameIntro() {
+                // requires 1 to keep going
+                System.out.println("Which Zelda Game Are You?");
+                System.out.println("You get to choose numbers 1-4 for every question. Enter '1' to play!");
+                int play = sc.nextInt();
+                if (play != 1) {
+                        System.out.println("Unidentifiable input. Please enter '1' to play");
+                        gameIntro();
+                }
+        }
+
+        // returns the index that is the max
+        // the tie breaker is the first Category that has the count is the "max" :/ 
+        public static int getMostPopularCatIndex(Category[] counts) {
+                int maxCount = 0;
+                int maxIndex = 0;
+                for (int i = 0; i < counts.length; i++) {
+                        if (counts[i].points > maxCount) {
+                                maxCount = counts[i].points;
+                                maxIndex = i;
+                        }
+                }
+                return maxIndex;
+        }
+}
