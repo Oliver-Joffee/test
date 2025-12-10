@@ -19,7 +19,7 @@ public class Quiz {
                 Category ocarina = new Category("Ocarina of Time",
                                 "The Legend of Zelda: Ocarina of Time was released in 1998! You love the classics, and think the “Zelda Formula” is a holy grail, and must be worshipped and followed at all costs. You think every Zelda game should have a musical instrument. Your favorite moment of Twilight Princess was probably talking to the Hero’s Shade and finding out it was the Link from OoT. You probably think Oot didn’t make the timeline confusing at all, but in the end, you don’t really care about the timeline.\n" + //
                                                                                 "");
-                Category wind = new Category("Wind Waker", "Ahoy matey! The Legend of Zelda: The Wind Waker was released in 2002! If given the choice, peace, You love the cartoony artstyle of this game to death, and probably hate Twilight Princess. The vast ocean calls to you, and you want more than anything to sail the seven seas. You enjoy taking a moment to breathe, and take in the wonder of the ocean. You don’t really care about the Zelda timeline.\n" + //
+                Category wind = new Category("Wind Waker", "Ahoy matey! The Legend of Zelda: The Wind Waker was released in 2002! You love the cartoony artstyle of this game to death, and probably hate that Twilight Princess robbed you of a Wind Waker 2. The vast ocean calls to you, and you want more than anything to sail the seven seas. You enjoy taking a moment to breathe, and take in the wonder of the ocean. You don’t really care about the Zelda timeline.\n" + //
                                                 "");
                 // Create Questions
                 Question q1 = new Question("How would you like to travel?");
@@ -45,9 +45,44 @@ public class Quiz {
                 q3.possibleAnswers[2] = new Answer("The Godfather", ocarina);
                 q3.possibleAnswers[3] = new Answer("Dune", skyward);
 
+                Question q4 = new Question("How do you feel about the Zelda timeline?\n" + //
+                                                "");
+                q4.possibleAnswers[0] = new Answer("The what?", breath);
+                q4.possibleAnswers[1] = new Answer("I LOVE IT YIPPEE YAYYYYYYY", skyward);
+                q4.possibleAnswers[2] = new Answer("It’s interesting but pretty simple.", ocarina);
+                q4.possibleAnswers[3] = new Answer("It’s interesting but too complicated for me :(((((", wind);
+
+                Question q5 = new Question("When were you introduced to Zelda?");
+
+                q5.possibleAnswers[0] = new Answer("2002", wind);
+                q5.possibleAnswers[1] = new Answer("2017", breath);
+                q5.possibleAnswers[2] = new Answer("1998", ocarina);
+                q5.possibleAnswers[3] = new Answer("2011", skyward);
+
+                Question q6 = new Question("What do you think the main theme of the Zelda series is?");
+
+                q6.possibleAnswers[0] = new Answer("A grand overarching tale of destiny and reincarnation", skyward);
+                q6.possibleAnswers[1] = new Answer("An adventure game with dungeons done in a SPECIFIC order", ocarina);
+                q6.possibleAnswers[2] = new Answer("A fun game that always offers something different in terms of artistic expression", wind);
+                q6.possibleAnswers[3] = new Answer("A tale of freedom and exploration that anyone can experience differently", breath);
+
+                Question q7 = new Question("How do you like to move through life?");
+
+                q7.possibleAnswers[0] = new Answer("I like having a distinct goal, making plans for that goal, and following those plans exactly.", skyward);
+                q7.possibleAnswers[1] = new Answer("I like to go with the flow, wherever life takes me.", breath);
+                q7.possibleAnswers[2] = new Answer("I like to have a consistent routine.", ocarina);
+                q7.possibleAnswers[3] = new Answer("I like to take life calmly. There’s no rush. Life is a vast ocean that has to be enjoyed.", wind);
+
+                Question q8 = new Question("Who's your favorite Intermiade Computer Science Student?");
+
+                q8.possibleAnswers[0] = new Answer("Oliver Joffee", breath);
+                q8.possibleAnswers[1] = new Answer("Conor Felszcack or Felzack or however you spell his last name", ocarina);
+                q8.possibleAnswers[2] = new Answer("Toby Korn", wind);
+                q8.possibleAnswers[3] = new Answer("Denver Boone", skyward);
+
                 // For each question, ask, read input, store answer.
                 gameIntro();
-                Question[] qList = { q1, q2, q3 };
+                Question[] qList = { q1, q2, q3, q4, q5, q6, q7, q8};
                 for (Question q : qList) {
                         Category c = q.ask(sc);
                         c.points++;

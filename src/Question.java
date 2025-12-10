@@ -21,8 +21,25 @@ public class Question {
             System.out.println("[" + choice + "]:" +
                     this.possibleAnswers[i].label);
         }
-        int ans = sc.nextInt();
-        return possibleAnswers[ans - 1].cat;
+        
+        int ans = 0;
+
+        if (sc.hasNextInt()) {
+            ans = sc.nextInt();
+            if (ans <= 4 || ans <= 1) {
+                return possibleAnswers[ans - 1].cat;
+            }
+        }
+        System.out.println("Please follow the instuctions and choose an answer 1-4.");
+        return(ask(sc));
+        // String ans = sc.next();
+        // System.out.println((ans == "1" || ans == "2" || ans == "3" || ans == "4"));
+        // if (ans == "1" || ans == "2" || ans == "3" || ans == "4") {
+        //     System.out.println("that was a number");
+        //     return possibleAnswers[Integer.parseInt(ans) - 1].cat;
+        // }
+        
+        // return possibleAnswers[0].cat;
     }
 
 }
