@@ -26,11 +26,12 @@ public class Question {
 
         if (sc.hasNextInt()) {
             ans = sc.nextInt();
-            if (ans <= 4 || ans <= 1) {
+            if (ans <= 4 || ans >= 1) {
                 return possibleAnswers[ans - 1].cat;
             }
         }
         System.out.println("Please follow the instuctions and choose an answer 1-4.");
+        sc.next();
         return(ask(sc));
         // String ans = sc.next();
         // System.out.println((ans == "1" || ans == "2" || ans == "3" || ans == "4"));
