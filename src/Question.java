@@ -1,6 +1,7 @@
 /* Irene Feng 10/12/2022
 A question class with Answers.
 */ 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Question {
@@ -14,6 +15,8 @@ public class Question {
 
     // ask a question, and return the category that corresponds to the answer
     Category ask(Scanner sc) {
+        
+        
         System.out.println(this.label);
         // prints out all the answer choices
         for (int i = 0; i < this.possibleAnswers.length; i++) {
@@ -43,4 +46,28 @@ public class Question {
         // return possibleAnswers[0].cat;
     }
 
+    Category tie(Scanner sc, ArrayList<Answer> answers) {
+        System.out.println(this.label);
+        //System.out.println("the amount of ansers is "+ Integer.toString(answers.size()));
+        //System.out.println("IM TYING AHHHHH");
+        for (int i = 0; i < answers.size(); i++) {
+            
+            //System.out.println("ACTIAVATED");
+            String choice = Integer.toString(i + 1);
+            System.out.println("[" + choice + "]:" +
+                answers.get(i).label);
+        }
+
+        int ans = 0;
+
+        if (sc.hasNextInt()) {
+            ans = sc.nextInt();
+            if (ans <= answers.size() || ans >= 1) {
+                return answers.get(ans - 1).cat;
+            }
+        }
+        System.out.println("Please follow the instuctions and choose an answer 1-4.");
+        sc.next();
+        return(tie(sc, answers));
+    }
 }

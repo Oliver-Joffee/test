@@ -4,6 +4,7 @@
  * This is the class where we create the Quiz and run it. It has the main method.  
  */
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Quiz {
         static Scanner sc = new Scanner(System.in);
@@ -80,12 +81,12 @@ public class Quiz {
                 q8.possibleAnswers[2] = new Answer("Toby Korn", wind);
                 q8.possibleAnswers[3] = new Answer("Denver Boone", skyward);
 
-                Question tiebreak = new Question("What's YOUR favorite Zelda game?");
+                // Question tiebreak = new Question("What's YOUR favorite Zelda game?");
 
-                tiebreak.possibleAnswers[0] = new Answer("Skyward Sword", skyward);
-                tiebreak.possibleAnswers[1] = new Answer("Breath of the Wild", breath);
-                tiebreak.possibleAnswers[2] = new Answer("Ocarina of Time", ocarina);
-                tiebreak.possibleAnswers[3] = new Answer("Wind Waker", wind);
+                // tiebreak.possibleAnswers[0] = new Answer("Skyward Sword", skyward);
+                // tiebreak.possibleAnswers[1] = new Answer("Breath of the Wild", breath);
+                // tiebreak.possibleAnswers[2] = new Answer("Ocarina of Time", ocarina);
+                // tiebreak.possibleAnswers[3] = new Answer("Wind Waker", wind);
 
                 // For each question, ask, read input, store answer.
                 gameIntro();
@@ -98,9 +99,35 @@ public class Quiz {
                 // Return Category
                 Category[] cList = { skyward, breath, ocarina, wind };
                 // these need to be in the same order or the points will be incorrect!
-                int index = getMostPopularCatIndex(cList);
-                System.out.println("If you were a Zelda game, you would be " + cList[index].label + ". ");
-                System.out.println(cList[index].description);
+                ArrayList<Integer> index = getMostPopularCatIndex(cList);
+                ArrayList<Answer> tiebreakAnswers = new ArrayList<Answer>(0); 
+                //System.out.println("THE COUNT IS" + Integer.toString(index.size()));
+                if (index.size() > 1) {
+                        
+                        
+                        Answer ans1 = new Answer("Breath of the Wild", breath);
+                        Answer ans2 = new Answer("Wind Waker", wind);
+                        Answer ans3 = new Answer("Ocarina of Time", ocarina);
+                        Answer ans4 = new Answer("Skyward Sword", skyward);
+                        
+                        Answer[] possibleTiebreakAnswers = {ans4, ans1, ans3, ans2};
+
+                        //ArrayList<Answer> tiebreakAnswers = new ArrayList<Answer>(0)
+                        for (int i = 0; i < index.size(); i ++) {
+                                tiebreakAnswers.add(possibleTiebreakAnswers[index.get(i)]);
+                                //Question q9 = new Question("What is your favorite Zelda Game?");
+
+                                //System.out.println("The length is " + Integer.toString(tiebreakAnswers.size()));
+                                //q9.tie(sc, tiebreakAnswers);
+                        }
+                        Question q9 = new Question("What is your favorite Zelda Game?");
+                        q9.tie(sc, tiebreakAnswers).points ++;
+                }
+
+                ArrayList<Integer> fin = getMostPopularCatIndex(cList);
+                
+                System.out.println("If you were a Zelda game, you would be " + cList[fin.get(0)].label + ". ");
+                System.out.println(cList[fin.get(0)].description);
 
         }
 
@@ -115,15 +142,24 @@ public class Quiz {
                 }
         }
 
+        
+
         // returns the index that is the max
         // the tie breaker is the first Category that has the count is the "max" :/ 
-        public static int getMostPopularCatIndex(Category[] counts) {
+        public static ArrayList<Integer> getMostPopularCatIndex(Category[] counts) {
                 int maxCount = 0;
-                int maxIndex = 0;
+                ArrayList<Integer> maxIndex = new ArrayList<>();
+                
                 for (int i = 0; i < counts.length; i++) {
                         if (counts[i].points > maxCount) {
                                 maxCount = counts[i].points;
-                                maxIndex = i;
+                                maxIndex.clear();
+                                maxIndex.add(i);
+                        } else if (counts[i].points == maxCount) {
+                                
+                                
+                                maxIndex.add(i);
+                                
                         }
                 }
                 return maxIndex;
