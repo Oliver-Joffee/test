@@ -80,6 +80,13 @@ public class Quiz {
                 q8.possibleAnswers[2] = new Answer("Toby Korn", wind);
                 q8.possibleAnswers[3] = new Answer("Denver Boone", skyward);
 
+                Question tiebreak = new Question("What's YOUR favorite Zelda game?");
+
+                tiebreak.possibleAnswers[0] = new Answer("Skyward Sword", skyward);
+                tiebreak.possibleAnswers[1] = new Answer("Breath of the Wild", breath);
+                tiebreak.possibleAnswers[2] = new Answer("Ocarina of Time", ocarina);
+                tiebreak.possibleAnswers[3] = new Answer("Wind Waker", wind);
+
                 // For each question, ask, read input, store answer.
                 gameIntro();
                 Question[] qList = { q1, q2, q3, q4, q5, q6, q7, q8};
