@@ -29,7 +29,7 @@ public class Question {
 
         if (sc.hasNextInt()) {
             ans = sc.nextInt();
-            if (ans <= 4 || ans >= 1) {
+            if (ans <= 4 && ans >= 1) {
                 return possibleAnswers[ans - 1].cat;
             }
         }
